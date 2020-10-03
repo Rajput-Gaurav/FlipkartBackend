@@ -1,6 +1,7 @@
 // main express file:
 const express = require("express");
 const logger = require("morgan");
+const bodyParser = require("body-parser");
 
 // import MobileRouter:
 const MobileRouter = require("./routes/mobile-route");
@@ -18,8 +19,16 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,POST,PUT,DELETE,PATCH,OPTIONS"
+  );
   next();
 });
+
+// use body-parser for parse the data:
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // mount the routers:
 app.use("/mobiles", MobileRouter);
