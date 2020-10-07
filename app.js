@@ -2,10 +2,21 @@
 const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 // import MobileRouter:
 const MobileRouter = require("./routes/mobile-route");
 
+// Connection too the DB:
+mongoose.connect(
+  "http://mongodb://localhost:27017/Flipkartbackend",
+  { useNewUrlParser: true },
+  (err) => {
+    if (!err) {
+      console.log("DB Connected.");
+    }
+  }
+);
 // initialize the express:
 const app = express();
 
